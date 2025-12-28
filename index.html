@@ -310,6 +310,17 @@ footer .footer-right p:hover {
 
 
 /* ------------------------------
+   FONTS
+------------------------------ */
+@font-face {
+    font-family: 'RoxboroughCF';
+    src: url('../FONT/roxboroughcf-medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap; /* 로딩 지연 시 fallback 표시 */
+}
+
+/* ------------------------------
    HERO IMAGE
 ------------------------------ */
 .hero-image {
@@ -318,9 +329,7 @@ footer .footer-right p:hover {
   background: url("img/MELLIN3.png") center / cover no-repeat;
   position: relative;
   overflow: hidden;
-  margin-top: 0; /* PC에서는 메뉴 위에 겹치도록 */
-
-  /* 배경 확대 애니메이션 */
+  margin-top: 0; /* PC 메뉴 겹치기 */
   transform: scale(1);
   transition: transform 5s ease-in-out;
 }
@@ -335,11 +344,12 @@ footer .footer-right p:hover {
 .hero-text1,
 .hero-text2 {
   position: absolute;
-  z-index: 2; /* AOS transform 시 항상 위 */
+  z-index: 2;
   color: #e9dfce;
-  font-family: 'RoxboroughCF', serif;
+  font-family: 'RoxboroughCF', serif; /* 항상 적용 */
 }
 
+/* PC 기준 */
 .hero-text1 {
   top: 35%;
   left: 13%;
@@ -354,6 +364,14 @@ footer .footer-right p:hover {
   line-height: 1.1;
 }
 
+.hero-text2 p.hero-copy {
+  font-size: 80px;
+  line-height: 1.1;
+  color: #e9dfce;
+  letter-spacing: 3.5px;
+  margin: 0;
+}
+
 .hero-copy {
   margin: 0;
   font-size: 0.9rem;
@@ -361,56 +379,34 @@ footer .footer-right p:hover {
   color: rgba(46,33,27,0.75);
 }
 
-
-.hero-text2 p.hero-copy {
-  font-size: 80px;       /* PC 기준 */
-  line-height: 1.1;
-  color: #e9dfce;        /* 원하는 색상 */
-  letter-spacing: 3.5px;
-  margin: 0;
-}
-
-
-/* ------------------------------
-   FONTS
------------------------------- */
-@font-face {
-    font-family: 'RoxboroughCF';
-    src: url('../font/roxboroughcf-medium.woff') format('woff');
-    font-weight: 500;
-    font-style: normal;
-    font-display: block;
-}
-
-/* ------------------------------
-   MEDIA QUERIES
------------------------------- */
-
 /* ===============================
-   TABLET: 768px 이하 (481~768)
+   TABLET: 481px ~ 768px
 =============================== */
 @media screen and (max-width: 768px) and (min-width: 481px) {
   .hero-image {
     height: 80vh;
     margin-top: 90px;
   }
+
   .hero-text1 {
     font-size: 28px;
     top: 30%;
     left: 8%;
   }
+
   .hero-text2 {
     font-size: 60px;
     top: 45%;
     left: 8%;
   }
+
   .hero-text2 p.hero-copy {
     font-size: 60px;
   }
 }
 
 /* ===============================
-   MOBILE LARGE: 480px ~ 413px
+   MOBILE LARGE: 413px ~ 480px
 =============================== */
 @media screen and (max-width: 480px) and (min-width: 413px) {
   .hero-image {
@@ -418,6 +414,7 @@ footer .footer-right p:hover {
     background-position: right top;
     margin-top: 90px;
   }
+
   .hero-text1 {
     font-size: 24px;
     top: 36%;
@@ -425,6 +422,7 @@ footer .footer-right p:hover {
     left: auto;
     text-align: right;
   }
+
   .hero-text2 {
     font-size: 45px;
     top: 50%;
@@ -432,13 +430,14 @@ footer .footer-right p:hover {
     left: auto;
     text-align: right;
   }
+
   .hero-text2 p.hero-copy {
     font-size: 40px;
   }
 }
 
 /* ===============================
-   MOBILE SMALL: 412px 이하
+   MOBILE SMALL: 0px ~ 412px
 =============================== */
 @media screen and (max-width: 412px) {
   .hero-image {
@@ -446,6 +445,7 @@ footer .footer-right p:hover {
     background-position: right top;
     margin-top: 80px;
   }
+
   .hero-text1 {
     font-size: 20px;
     top: 34%;
@@ -453,6 +453,7 @@ footer .footer-right p:hover {
     left: auto;
     text-align: right;
   }
+
   .hero-text2 {
     font-size: 38px;
     top: 48%;
@@ -460,11 +461,11 @@ footer .footer-right p:hover {
     left: auto;
     text-align: right;
   }
+
   .hero-text2 p.hero-copy {
     font-size: 35px;
   }
 }
-
 
 
 
@@ -800,6 +801,7 @@ footer .footer-right p:hover {
   bottom: 0;            /* 추가 이동 필요하면 조정 */
   color: #7a694fd8;
   font-size: 1rem;
+  display: block; /* PC에서는 보이도록 */
 }
 
 
@@ -846,13 +848,18 @@ footer .footer-right p:hover {
     z-index: 2;
   }
 
-  .hero-video .hero-text .hero-copy {
-    font-size: 0.9rem;       /* 모바일용 글씨 크기 */
+   .hero-text .hero-copy {
+    font-size: 0.7rem;       /* 모바일용 글씨 크기 */
     line-height: 1.4;
     color: #5a4b3d;          /* 모바일에 맞게 색상 조정 */
     letter-spacing: 1px;
-    display: none;
+    
   }
+    .hero-video .hero-text .hero-copy {
+        display: none; /* 모바일에서 숨김 */
+}
+
+  
 
   /* LOOKBOOK 버튼 조정 */
   .lookbook-container {
@@ -2046,6 +2053,7 @@ a[href*="intro.html"]:hover {
     <p class="hero-copy">Crafting Luxury, Defining Style</p>
   </div>
 </section>
+
 
 
 <div class="lookbook-container">
