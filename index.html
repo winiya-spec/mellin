@@ -410,6 +410,7 @@ footer .footer-right p:hover {
       font-family: 'RoxboroughCF', serif;
   }
 
+
 /* ===============================
    MOBILE LARGE: 413px ~ 480px
 =============================== */
@@ -771,52 +772,51 @@ footer .footer-right p:hover {
 
 
 
+/* =========================
+   HERO VIDEO PC
+   ========================= */
 .hero-video {
-  position:relative;
-  width:100%;           /* 양쪽 여백 확보, 원하는 비율로 조절 가능 */
-  max-width:1600px;    /* 최대 크기 제한 */
-  height:100vh;         /* 높이 조절 */
-  margin:0 auto;       /* 가운데 정렬 */
-  overflow:hidden;
-  /* border-radius:100px; */
+  position: relative;
+  width: 100%;
+  max-width: 1600px;    /* PC 최대 폭 */
+  height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
 }
+
 .hero-video video {
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:100%;
-  height:100%;
-  object-fit:cover;       /* 화면 가득 채우기 */
-  transform:translate(-50%, -50%);  /* 중앙 정렬 */
-  z-index:-1;             /* 다른 콘텐츠 위에 겹치지 않게 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* 화면 가득 채우기 */
+  transform: translate(-50%, -50%);
+  z-index: -1;             /* 텍스트/오버레이 위에 겹치지 않게 */
 }
 
 .hero-video .overlay {
-  position:absolute;
-  inset:0;
-  background:rgba(246,243,238,0.2); /* 라떼 아이보리 무드 오버레이 */
-  z-index:1;
+  position: absolute;
+  inset: 0;
+  background: rgba(246, 243, 238, 0.2); /* 라떼 아이보리 오버레이 */
+  z-index: 1;
 }
 
-
 .hero-video .hero-text {
-  position: absolute;   /* 부모 기준으로 위치 잡기 */
-  bottom: 50px;         /* 화면 아래에서 20px */
-  left: 17%;            /* 가로 중앙 */
-  transform: translateX(-50%); /* 완전 중앙 정렬 */
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 2;
   text-align: center;
-  width: 100%;          /* 필요하면 */
+  width: 100%;
 }
 
 .hero-video .hero-text .hero-copy {
-  position: relative;   /* 부모 기준으로 이동 가능 */
-  bottom: 0;            /* 추가 이동 필요하면 조정 */
   color: #7a694fd8;
   font-size: 1rem;
-  display: block; /* PC에서는 보이도록 */
+  display: block;
 }
-
 
 /* =========================
    HERO VIDEO MOBILE (480px 이하)
@@ -824,14 +824,8 @@ footer .footer-right p:hover {
 @media (max-width: 480px) {
 
   .hero-video {
-    width: 100%;           /* 화면 폭에 맞춤 */
-    max-width: 100%;       /* 최대 폭 제한 제거 */
-    height: 60vh;          /* 모바일에서 높이 줄임 */
-    margin: 0 auto;
-
-    overflow: hidden;
-    border-radius: 0;      /* 모바일에서는 둥근 모서리 제거 */
-    
+    height: 60vh;            /* 모바일 높이 축소 */
+    border-radius: 0;
   }
 
   .hero-video video {
@@ -846,31 +840,23 @@ footer .footer-right p:hover {
   }
 
   .hero-video .overlay {
-    background: rgba(246, 243, 238, 0.25); /* 오버레이 약간 더 어둡게 */
-    z-index: 0;
+    background: rgba(246, 243, 238, 0.25); /* 오버레이 조금 더 강조 */
+    z-index: 1;
   }
 
-  /* HERO TEXT 중앙 정렬 */
-   .hero-video .hero-text {
-    position: absolute;      /* 부모 기준으로 위치 */
-    bottom: 20px;            /* 화면 아래에서 여유 */
-    left: 43%;               /* 가로 중앙 기준 */
-    transform: translateX(-50%);  /* X축 완전 중앙 */
-    width: 90%;              /* 글씨 길이 조정 */
-    text-align: center;      /* 글씨 중앙 정렬 */
+  .hero-video .hero-text {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
     z-index: 2;
   }
 
-   .hero-text .hero-copy {
-    font-size: 0.7rem;       /* 모바일용 글씨 크기 */
-    line-height: 1.4;
-    color: #5a4b3d;          /* 모바일에 맞게 색상 조정 */
-    letter-spacing: 1px;
-    
+  .hero-video .hero-text .hero-copy {
+    display: none;  /* 모바일에서는 텍스트 숨김 */
   }
-    .hero-video .hero-text .hero-copy {
-        display: none; /* 모바일에서 숨김 */
 }
+
 
   
 
@@ -895,7 +881,7 @@ footer .footer-right p:hover {
   .lookbook .arrow {
     margin-left: 4px;
   }
-}
+
 
 
 
@@ -2059,8 +2045,15 @@ a[href*="intro.html"]:hover {
 
 
 <section class="hero-video">
-  <video id="heroVideo" src="video/MELLIN.mp4" autoplay muted loop playsinline></video>
+  <video id="heroVideo" autoplay muted loop playsinline>
+    <!-- 4K 영상과 1080p 영상 선택 가능 -->
+    <source src="video/MELLIN_1080.mp4" type="video/mp4" media="(max-width: 768px)">
+    <source src="video/MELLIN.mp4" type="video/mp4">
+    브라우저가 동영상을 지원하지 않습니다.
+  </video>
+
   <div class="overlay"></div>
+
   <div class="hero-text">
     <p class="hero-copy">Crafting Luxury, Defining Style</p>
   </div>
