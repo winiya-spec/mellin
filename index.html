@@ -1,4 +1,4 @@
-ovid<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 
@@ -786,7 +786,6 @@ footer .footer-right p:hover {
   height: 100vh;
   margin: 0 auto;
   overflow: hidden;
-  margin-top: 5%;
 }
 
 .hero-video video {
@@ -831,7 +830,6 @@ footer .footer-right p:hover {
   .hero-video {
     height: 60vh;            /* 모바일 높이 축소 */
     border-radius: 0;
-    margin-top: 0;
   }
 
   .hero-video video {
@@ -1312,6 +1310,22 @@ footer .footer-right p:hover {
   margin-bottom: 30px;
   line-height: 1.2;
 }
+/* 배경 영문 MELLIN */
+.philosophy-word {
+  position: absolute;
+  font-size: 20vw; /* 크게 배경처럼 */
+  font-weight: 900;
+  font-family: 'Noto Sans KR', 'Arial', 'Helvetica', sans-serif; /* 고딕체 스타일 */
+  color: rgba(140, 111, 85, 0.08);
+  top: 0%;
+  right: 7%;
+  pointer-events: none;
+  z-index: 1;
+  letter-spacing: 2px;
+}
+
+
+
 
 /* =========================
    반응형: 태블릿
@@ -1375,6 +1389,11 @@ footer .footer-right p:hover {
     top: 25%;
     right: 1%;
   }
+/* 배경 영문 MELLIN */
+ .philosophy-word {
+    top: 20%; /* 이 부분만 변경 */
+  }
+
 }
 
 /* =========================
@@ -1406,21 +1425,6 @@ footer .footer-right p:hover {
 .philosophy-text.visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* 배경 영문 MELLIN */
-.philosophy-word {
-  position: absolute;
-  
-  font-size: 20vw; /* 크게 배경처럼 */
-  font-weight: 900;
-  font-family: 'Noto Sans KR', 'Arial', 'Helvetica', sans-serif; /* 고딕체 스타일 */
-  color: rgba(140, 111, 85, 0.08);
-  top: 20%;
-  right: 7%;
-  pointer-events: none;
-  z-index: 1;
-  letter-spacing: 2px;
 }
 
 
@@ -1904,16 +1908,6 @@ a[href*="intro.html"]:hover {
     display: block;  /* 모바일 줄바꿈 */
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
