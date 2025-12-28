@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>MELLIN</title>
 <script>
   window.addEventListener("load", () => {
@@ -55,70 +56,7 @@ section{
   position:relative;
 }
 
-/* HERO */
-/* 기본 스타일 (데스크탑) */
-.hero {
-  height: 100vh;
-  display: flex;
-  align-items: flex-end;
-  position: relative; /* hero-sub 절대 위치 위해 */
-}
 
-.hero-title {
-  font-family: 'Cormorant', serif;
-  font-size: 6rem;
-  letter-spacing: 0.2em;
-}
-
-.hero-sub {
-  position: absolute;
-  top: 40%;
-  right: 10%;
-  font-size: 0.75rem;
-  letter-spacing: 0.35em;
-  color: var(--latte);
-  writing-mode: vertical-rl;
-}
-
-/* 반응형: 태블릿 */
-@media (max-width: 1024px) {
-  .hero-title {
-    font-size: 4.5rem;
-    letter-spacing: 0.15em;
-  }
-  
-  .hero-sub {
-    top: 35%;
-    right: 5%;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-  }
-}
-
-/* 반응형: 모바일 */
-@media (max-width: 768px) {
-  .hero {
-    align-items: center; /* 화면 작을 때 중앙 정렬 */
-    justify-content: center;
-  }
-
-  .hero-title {
-    font-size: 3rem;
-    text-align: center;
-    letter-spacing: 0.1em;
-  }
-  
-  .hero-sub {
-    position: relative; /* 절대 위치 대신 흐름에 맞게 */
-    top: auto;
-    right: auto;
-    writing-mode: horizontal-tb;
-    margin-top: 1rem;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-align: center;
-  }
-}
 
 
 
@@ -371,168 +309,138 @@ footer .footer-right p:hover {
 
 
 
+/* ------------------------------
+   HERO IMAGE
+------------------------------ */
+.hero-image {
+  width: 100vw;
+  height: 100vh;
+  background: url("img/MELLIN3.png") center / cover no-repeat;
+  position: relative;
+  overflow: hidden;
 
-
-
-
-
-
-
-
-
-
-
-.hero-image{
-  width:100vw;
-  height:100vh;
-
-  background:
-   
-    url("img/MELLIN3.png") center / cover no-repeat;
-
-  position:relative;
-
-  /* 초기 상태 */
+  /* 배경 확대 애니메이션 */
   transform: scale(1);
-  transition: transform 5s ease-in-out; /* 5초 동안 천천히 */
+  transition: transform 5s ease-in-out;
 }
 
-/* 로딩 후 커지게 */
 .hero-image.loaded {
-  transform: scale(1.05); /* 1.05배로 살짝 확대 */
+  transform: scale(1.05);
+}
+
+/* ------------------------------
+   HERO TEXT
+------------------------------ */
+.hero-text1,
+.hero-text2 {
+  position: absolute;
+  z-index: 2; /* AOS transform 시 항상 위 */
+  color: #e9dfce;
+  font-family: 'RoxboroughCF', serif;
+}
+
+.hero-text1 {
+  top: 35%;
+  left: 13%;
+  font-size: 35px;
+  letter-spacing: 1.2px;
+}
+
+.hero-text2 {
+  top: 52%;
+  left: 13%;
+  font-size: 80px;
+  line-height: 1.1;
+}
+
+.hero-copy {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.25em;
+  color: rgba(46,33,27,0.75);
 }
 
 
-
-
-
-/* 텍스트 */
-.hero-text{
-  position:absolute;
-  bottom:8%;
-  left:8%;
+.hero-text2 p.hero-copy {
+  font-size: 80px;       /* PC 기준 */
+  line-height: 1.1;
+  color: #e9dfce;        /* 원하는 색상 */
+  letter-spacing: 3.5px;
+  margin: 0;
 }
 
 
-/* 1. @font-face로 폰트 정의 */
+/* ------------------------------
+   FONTS
+------------------------------ */
 @font-face {
     font-family: 'RoxboroughCF';
     src: url('../font/roxboroughcf-medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
-     font-display: block; /* 핵심 */
+    font-display: block;
 }
 
-/* 2. 적용 */
-.hero-text1{
-    position:absolute;
-    top: 35%;       /* 화면 위에서 25% 위치 */
-    left: 13%;
-    font-family: 'RoxboroughCF', serif;
-    letter-spacing: 1.2px;
-    font-size:35px;
-    color: #e9dfce
-  }
-
-.hero-text2{
-    position:absolute;
-     top:52%;     
-    left: 13%;
-    font-family: 'RoxboroughCF', serif;
-    font-size: 80px;
-    line-height: 1.1;
-}
-
-
-fieldset {
-    border: none; 
-    padding: 0;
-    margin: 0;
-    color: #e9dfce;
-}
-
-.hero-copy1{}
-
-.hero-copy{
-  font-size:0.9rem;
-  letter-spacing:0.25em;
-  color:rgba(46,33,27,0.75);
-}
-
-/* ===============================
-   HERO IMAGE & TEXT MEDIA QUERIES
-================================ */
+/* ------------------------------
+   MEDIA QUERIES
+------------------------------ */
 
 /* 태블릿 768px 이하 */
 @media screen and (max-width: 768px) {
   .hero-image {
-    height: 80vh;           /* 높이 조정 */
-    background-size: cover; /* 이미지 비율 유지 */
+    height: 80vh;
   }
-
-  .hero-text {
-    bottom: 6%;
-    left: 6%;
-  }
-
   .hero-text1 {
     font-size: 28px;
     top: 30%;
     left: 8%;
   }
-
   .hero-text2 {
     font-size: 60px;
     top: 45%;
     left: 8%;
     line-height: 1.1;
   }
-
   .hero-copy {
     font-size: 0.85rem;
+  }
+    .hero-text2 p.hero-copy {
+    font-size: 60px;
+    line-height: 1.1;
   }
 }
 
 /* 모바일 480px 이하 */
 @media screen and (max-width: 480px) {
   .hero-image {
-    height: 70vh;           
-    background-size: cover;
-    background-position: right top; /* 이미지 오른쪽 중심 */
+    height: 70vh;
+    background-position: right top;
     margin-top: 80px;
-    
   }
-
-  /* 텍스트 전체 오른쪽 정렬 + 여백 확보 */
-  .hero-text {
-    bottom: 5%;
-    right: 12%;      /* 오른쪽 여백 확보 */
-    left: auto;       
-    text-align: right; 
+  .hero-text1,
+  .hero-text2,
+  .hero-copy {
+    right: 12%;
+    left: auto;
+    text-align: right;
   }
-
   .hero-text1 {
     font-size: 24px;
     top: 38%;
-    right: 12%;      /* 오른쪽 여백 확보 */
-    left: auto;
-    text-align: right;
   }
-
   .hero-text2 {
     font-size: 45px;
     top: 50%;
-    right: 12%;      /* 오른쪽 여백 확보 */
-    left: auto;
     line-height: 1.1;
-    text-align: right;
   }
-
   .hero-copy {
     font-size: 0.75rem;
-    text-align: right;
   }
+
+.hero-text2 p.hero-copy {font-size: 40px;}
+
 }
+
 
 
 
@@ -1912,20 +1820,14 @@ a[href*="intro.html"]:hover {
 
 
 <section class="hero-image">
- <div class="hero-text1">
-    <p class="hero-copy1"  data-aos="fade-up" data-aos-delay="500">MELLIN MOOD</p>
+  <div class="hero-text1" data-aos="fade-up" data-aos-delay="500">
+    <p class="hero-copy1">MELLIN MOOD</p>
   </div>
-   <div class="hero-text2" data-aos="fade-right" data-aos-delay="1000">
-    <p class="hero-copy"><Fieldset>Form begins <br>before<br>
-      definition
-    </Fieldset></p>
+  <div class="hero-text2" data-aos="fade-right" data-aos-delay="1000">
+    <p class="hero-copy">Form begins <br>before<br>definition</p>
   </div>
-
-
-<!--   <div class="hero-text">
-    <p class="hero-copy">Form begins before definition.</p>
-  </div> -->
 </section>
+
 
 
 
@@ -2265,15 +2167,6 @@ setInterval(() => {
 
 
 
-<script>
-  // 페이지 로딩 후 .hero-image에 loaded 클래스 추가
-  window.addEventListener('load', () => {
-    document.querySelector('.hero-image').classList.add('loaded');
-  });
-</script>
-
-
-
 
 
 
@@ -2402,6 +2295,22 @@ menuLinks.forEach(link => {
 
 
 
+<script>
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero-image');
+
+  // 강제 reflow
+  hero.offsetHeight;  // 이 한 줄로 브라우저가 변화를 감지
+
+  hero.classList.add('loaded');
+});
+
+</script>
+
+
+
+
+
 
 
 
@@ -2411,15 +2320,29 @@ menuLinks.forEach(link => {
 <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
-<!-- JS: 슬라이드 자동 전환 + AOS refresh -->
 <script>
-AOS.init({
-  duration: 1400,
-  easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-  once: false,
-  offset: 120,
-});
+  function initAOS() {
+    AOS.init({
+      duration: 1400,                   // 애니메이션 지속시간
+      easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      once: false,                       // 스크롤시 반복
+      offset: 120                        // 시작 위치
+    });
+
+    AOS.refresh();                        // 요소 위치 재계산
+  }
+
+  // 페이지 로드 시 실행
+  window.addEventListener('load', () => {
+    initAOS();
+  });
+
+  // 새로고침 시 항상 재실행
+  window.addEventListener('beforeunload', () => {
+    window.scrollTo(0,0);  // 새로고침 후 스크롤 초기화
+  });
 </script>
+
 
 
 
