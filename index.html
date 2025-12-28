@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MELLIN</title>
+
 <script>
   window.addEventListener("load", () => {
   if (!sessionStorage.getItem("introSeen")) {
@@ -18,6 +19,8 @@
 
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+
 <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 <link rel="preload"
       href="font/roxboroughcf-medium.woff"
@@ -1274,7 +1277,7 @@ footer .footer-right p:hover {
 
 .philosophy p {
   margin-bottom: 36px;
-  font-size: 1.05rem;      /* 약 16.8px */
+  font-size: 1.05rem;      
   line-height: 1.6;
   word-break: keep-all;
   white-space: normal;
@@ -1284,10 +1287,11 @@ footer .footer-right p:hover {
 .mobile-br {
   display: none;
 }
-/* floating word */
+
+/* floating word (배경 큰 텍스트) */
 .word {
   position: absolute;
-  font-family: 'Cormorant', serif;
+  font-family: 'Cormorant', 'Noto Serif KR', serif; /* 영문 Cormorant, 한글 Noto Serif KR */
   font-size: 7rem;
   color: rgba(139, 111, 90, 0.12);
   top: 40%;
@@ -1295,7 +1299,16 @@ footer .footer-right p:hover {
   pointer-events: none;
 }
 
-
+/* 한글 ‘멜린’ */
+.philosophy-text h1.kor {
+  font-size: 80px;
+  font-family: 'Noto Serif KR', serif !important;
+  font-weight: 700;
+  color: #8B6F5A;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
 
 /* =========================
    반응형: 태블릿
@@ -1306,7 +1319,7 @@ footer .footer-right p:hover {
   }
 
   .philosophy p {
-    font-size: 0.95rem;     /* 약 15.2px */
+    font-size: 0.95rem;
     margin-bottom: 28px;
   }
 
@@ -1327,7 +1340,7 @@ footer .footer-right p:hover {
   }
 
   .philosophy p {
-    font-size: 0.85rem;     /* 약 13.6px */
+    font-size: 0.85rem;
     margin-bottom: 24px;
     line-height: 1.55;
     word-break: break-word;
@@ -1338,23 +1351,22 @@ footer .footer-right p:hover {
     top: 30%;
     right: 2%;
   }
-
 }
 
 /* =========================
    반응형: 초소형 모바일 (480px 이하)
    ========================= */
 @media (max-width: 480px) {
-.mobile-br {
+  .mobile-br {
     display: block; /* 줄바꿈 적용 */
   }
 
-  /* 텍스트 크기, 줄 간격 조정 */
   .philosophy-text p {
     font-size: 1.1rem;
     line-height: 1.3;
     margin-bottom: 20px;
   }
+
   .word {
     font-size: 2.5rem;
     top: 25%;
@@ -1362,10 +1374,9 @@ footer .footer-right p:hover {
   }
 }
 
-
-
-
-
+/* =========================
+   PHILOSOPHY SECTION 추가 스타일
+   ========================= */
 .philosophy-section {
   position: relative;
   padding: 100px 10%;
@@ -1394,22 +1405,12 @@ footer .footer-right p:hover {
   transform: translateY(0);
 }
 
-/* 한글 ‘멜린’ */
-.philosophy-text h1.kor {
-  font-size: 60px;
-  font-family: 'Cormorant Garamond', serif; /* 고급 세리프 */
-  font-weight: 700;
-  color: #8B6F5A;
-  letter-spacing: 1px;
-  margin-bottom: 30px;
-  line-height: 1.2;
-}
-
-/* 영문 MELLIN 배경 */
+/* 배경 영문 MELLIN */
 .philosophy-word {
   position: absolute;
   font-size: 20vw; /* 크게 배경처럼 */
   font-weight: 900;
+  font-family: 'Cormorant', serif;
   color: rgba(140, 111, 85, 0.08);
   top: 20%;
   right: 7%;
@@ -1417,9 +1418,6 @@ footer .footer-right p:hover {
   z-index: 1;
   letter-spacing: 2px;
 }
-
-
-
 
 
 
