@@ -669,6 +669,24 @@ footer .footer-right p:hover {
 }
 
 
+.hero-video .hero-text {
+  position: absolute;   /* 부모 기준으로 위치 잡기 */
+  bottom: 50px;         /* 화면 아래에서 20px */
+  left: 17%;            /* 가로 중앙 */
+  transform: translateX(-50%); /* 완전 중앙 정렬 */
+  z-index: 2;
+  text-align: center;
+  width: 100%;          /* 필요하면 */
+}
+
+.hero-video .hero-text .hero-copy {
+  position: relative;   /* 부모 기준으로 이동 가능 */
+  bottom: 0;            /* 추가 이동 필요하면 조정 */
+  color: #7a694fd8;
+  font-size: 1rem;
+}
+
+
 /* =========================
    HERO VIDEO MOBILE (480px 이하)
    ========================= */
@@ -702,23 +720,22 @@ footer .footer-right p:hover {
   }
 
   /* HERO TEXT 중앙 정렬 */
-    .hero-video .hero-text {
-    position: absolute;
-    top: 90%;                 /* 중앙 -> 하단으로 이동 */
-    left: 50%;
-    transform: translateX(-50%);  /* X축만 중앙 */
-    width: 90%;
-    text-align: center;
-    
-    
+   .hero-video .hero-text {
+    position: absolute;      /* 부모 기준으로 위치 */
+    bottom: 20px;            /* 화면 아래에서 여유 */
+    left: 43%;               /* 가로 중앙 기준 */
+    transform: translateX(-50%);  /* X축 완전 중앙 */
+    width: 90%;              /* 글씨 길이 조정 */
+    text-align: center;      /* 글씨 중앙 정렬 */
+    z-index: 2;
   }
 
-  .hero-video .hero-copy {
-    font-size: 0.9rem;
+  .hero-video .hero-text .hero-copy {
+    font-size: 0.9rem;       /* 모바일용 글씨 크기 */
     line-height: 1.4;
-    color: #5a4b3d;
+    color: #5a4b3d;          /* 모바일에 맞게 색상 조정 */
     letter-spacing: 1px;
-    transform: translateX(-20%);  /* X축만 중앙 */
+    display: none;
   }
 
   /* LOOKBOOK 버튼 조정 */
