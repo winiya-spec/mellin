@@ -1808,7 +1808,9 @@ a[href*="intro.html"]:hover {
 
 
 
-/* PHILOSOPHY 섹션 기본 */
+/* =========================
+   PHILOSOPHY 섹션 기본
+   ========================= */
 .philosophy-section {
   position: relative;
   padding: 100px 10%;
@@ -1837,10 +1839,9 @@ a[href*="intro.html"]:hover {
   transform: translateY(0);
 }
 
-/* 한글 ‘멜린’ */
 .philosophy-text h1.kor {
   font-size: 60px;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'RoxboroughCF', 'Cormorant Garamond', serif;
   font-weight: 700;
   color: #8B6F5A;
   letter-spacing: 1px;
@@ -1853,16 +1854,14 @@ a[href*="intro.html"]:hover {
    ========================= */
 .rotating-text-wrapper {
   position: absolute;
-  top: 35%;          /* PHILOSOPHY 섹션에 맞게 위치 조정 */
+  top: 35%;          /* 섹션 기준 위치 */
   left: 18%;
   transform: translate(-50%, -50%) rotate(0deg);
-  width: 200px;      /* PC 기준 크기 */
+  width: 200px;
   height: 200px;
   pointer-events: none;
-  
-  opacity: 0;        /* 스크롤 시 나타나도록 */
+  opacity: 0;
   transition: opacity 1s ease;
-  
   animation: rotate 20s linear infinite;
 }
 
@@ -1871,13 +1870,12 @@ a[href*="intro.html"]:hover {
 }
 
 .rotating-text-wrapper text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 12px;
-  fill: rgba(115, 90, 65, 0.5); /* 브라운 무드 */
+  font-family: 'RoxboroughCF', 'Cormorant Garamond', serif;
+  font-size: 13px;
+  fill: rgba(115, 90, 65, 0.5);
   letter-spacing: 1;
 }
 
-/* 회전 애니메이션 */
 @keyframes rotate {
   from { transform: translate(-50%, -50%) rotate(0deg); }
   to { transform: translate(-50%, -50%) rotate(360deg); }
@@ -1888,21 +1886,23 @@ a[href*="intro.html"]:hover {
    ========================= */
 @media (max-width: 480px) {
   .rotating-text-wrapper {
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
     top: 30%;          
-  left: 43%;
+    left: 40%;         /* 모바일 화면 중앙 */
+    transform: translate(-50%, -50%) rotate(0deg);
   }
 
   .rotating-text-wrapper text {
-    font-size: 12px;
-    letter-spacing: 0.5;
+    font-size: 12.5px;   /* 모바일용 글자 크기 */
+    letter-spacing: 1.5;
   }
 
   .mobile-br {
-    display: block;  /* 모바일에서 줄바꿈 발생 */
+    display: block;  /* 모바일 줄바꿈 */
   }
 }
+
 
 
 
