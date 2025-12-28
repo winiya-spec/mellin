@@ -1,0 +1,2475 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MELLIN</title>
+<script>
+  window.addEventListener("load", () => {
+    if (!sessionStorage.getItem("introSeen")) {
+      window.location.replace("intro.html");
+    }
+  });
+  </script>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link rel="preload" href="fonts/YourFont.woff2" as="font" type="font/woff2" crossorigin>
+
+
+<style>
+
+body, html {
+  overflow-x: hidden; /* 가로 스크롤 제거 */
+}
+
+
+
+:root{
+  --ivory:#F6F3EE;
+  --latte:#8B6F5A;
+  --deep:#2E211B;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+
+body{
+  background:var(--ivory);
+  color:var(--deep);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+
+/* general */
+section{
+  padding:160px 8%;
+  position:relative;
+}
+
+/* HERO */
+/* 기본 스타일 (데스크탑) */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  position: relative; /* hero-sub 절대 위치 위해 */
+}
+
+.hero-title {
+  font-family: 'Cormorant', serif;
+  font-size: 6rem;
+  letter-spacing: 0.2em;
+}
+
+.hero-sub {
+  position: absolute;
+  top: 40%;
+  right: 10%;
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  color: var(--latte);
+  writing-mode: vertical-rl;
+}
+
+/* 반응형: 태블릿 */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 4.5rem;
+    letter-spacing: 0.15em;
+  }
+  
+  .hero-sub {
+    top: 35%;
+    right: 5%;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+  }
+}
+
+/* 반응형: 모바일 */
+@media (max-width: 768px) {
+  .hero {
+    align-items: center; /* 화면 작을 때 중앙 정렬 */
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    text-align: center;
+    letter-spacing: 0.1em;
+  }
+  
+  .hero-sub {
+    position: relative; /* 절대 위치 대신 흐름에 맞게 */
+    top: auto;
+    right: auto;
+    writing-mode: horizontal-tb;
+    margin-top: 1rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-align: center;
+  }
+}
+
+
+
+
+
+
+/* =========================
+   COLLECTION GRID
+   ========================= */
+.collection {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* PC: 2열 */
+  gap: 120px;                     /* PC: 블록 간격 */
+}
+
+/* 공통 블록 */
+.block {
+  width: 100%;
+  height: 700px;                  /* PC 기본 높이 */
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 1.4s ease; /* 부드러운 확대 효과 */
+}
+
+/* 개별 이미지 */
+.block-1 { background-image: url("img/8.png"); }
+.block-2 { background-image: url("img/9.png"); }
+
+/* 아이보리 오버레이 */
+.block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(246, 243, 238, 0.28);
+  transition: opacity 0.6s ease;
+}
+
+/* hover 효과 */
+.block:hover {
+  transform: scale(1.02);
+  filter: none; /* 필터 완전 제거 */
+}
+
+.block:hover::after {
+  opacity: 0; /* 오버레이 제거 */
+}
+
+/* 캡션 */
+.block span {
+  position: absolute;
+  bottom: -28px;
+  left: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--latte);
+}
+
+
+/* =========================
+   반응형: 태블릿 (1024px 이하)
+   ========================= */
+@media (max-width: 1024px) {
+  .collection {
+    grid-template-columns: 1fr; /* 1열로 변경 */
+    gap: 80px;                  /* 간격 축소 */
+  }
+
+  .block {
+    height: 420px;               /* 태블릿 높이 */
+  }
+}
+
+/* =========================
+   반응형: 모바일 (480px 이하)
+   ========================= */
+@media (max-width: 480px) {
+  .collection {
+    grid-template-columns: 1fr; /* 1열 유지 */
+    gap: 40px;                  /* 모바일 간격 축소 */
+    margin-top: -120px;         /* 섹션 간격 조정 */
+  }
+
+  .block {
+    height: 320px;               /* 모바일 전용 높이 */
+  }
+
+  .block span {
+    font-size: 0.7rem;           /* 캡션 글자 축소 */
+    bottom: -20px;               /* 캡션 위치 조정 */
+  }
+}
+
+
+/* footer */
+/* 푸터 배경 & 레이아웃 */
+footer{
+  position:relative;
+  padding:80px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  background:#8B6F5A;  /* 라떼 브라운 */
+  font-family:'Cormorant', serif;
+  font-size:0.9rem;
+  letter-spacing:0.25em;
+  color:#F6F3EE;
+  flex-wrap:wrap;
+}
+
+/* 상단 그라데이션 라인 */
+footer::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:2px;
+  background:linear-gradient(to right, #F6F3EE, rgba(246,243,238,0.3));
+  opacity:0.5;
+}
+
+/* 좌측 텍스트 + 로고 */
+footer .footer-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:500;
+  font-size:0.95rem;
+}
+
+footer .footer-left img.footer-logo{
+  height:100px;
+  width:auto;
+}
+
+/* 우측 텍스트 */
+footer .footer-right{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:5px;
+  font-weight:300;
+ font-family:'Inter',sans-serif;
+  font-size:0.7rem;
+}
+
+@media(max-width:768px){
+  footer .footer-right{
+    align-items:center;
+  }
+}
+
+
+/* hover 효과 */
+footer .footer-right p:hover{
+  color:#EEDFCC; 
+  transition:color 0.4s ease;
+}
+
+/* 반응형 */
+@media(max-width:768px){
+  footer{
+    flex-direction:column;
+    text-align:center;
+    gap:16px;
+  }
+  footer::before{
+    height:1px;
+  }
+  footer .footer-left, footer .footer-right{
+    align-items:center;
+  }
+}
+
+/* 반응형 */
+@media(max-width:768px){
+  footer{
+    flex-direction:column;
+    text-align:center;
+    gap:16px;
+  }
+  footer::before{
+    height:1px;
+  }
+  .footer-left{
+    justify-content:center;
+  }
+}
+
+/* 반응형 */
+@media(max-width:768px){
+  footer{
+    flex-direction:column;
+    text-align:center;
+    gap:16px;
+  }
+  footer::before{
+    height:1px;
+  }
+}
+
+
+/* 반응형 */
+@media(max-width:768px){
+  footer{
+    flex-direction:column;
+    text-align:center;
+    gap:16px;
+  }
+}
+
+
+@media(max-width:900px){
+  .hero-title{font-size:3.5rem;}
+  .collection{grid-template-columns:1fr;}
+  .word{display:none;}
+}
+
+
+
+@media (max-width: 480px) {
+  footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px; /* footer-left와 footer-right 사이 간격 */
+    padding: 40px 8%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+    margin-top: 10%;
+    
+  }
+
+  footer.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  footer .footer-left {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  footer .footer-left img.footer-logo {
+    height: 70px;
+    width: auto;
+  }
+
+  footer .footer-left p {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-align: center;
+  }
+
+  /* footer-left와 footer-right 간 간격을 위한 여유 */
+  footer .footer-right {
+    margin-top: 16px; /* 좌측과 간격 조정 */
+    align-items: center;
+    gap: 4px;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+  }
+
+  footer .footer-right p {
+    margin: 0;
+    text-align: center;
+  }
+
+  footer .footer-right p.address {
+    white-space: pre-line;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hero-image{
+  width:100vw;
+  height:100vh;
+
+  background:
+   
+    url("img/MELLIN3.png") center / cover no-repeat;
+
+  position:relative;
+
+  /* 초기 상태 */
+  transform: scale(1);
+  transition: transform 5s ease-in-out; /* 5초 동안 천천히 */
+}
+
+/* 로딩 후 커지게 */
+.hero-image.loaded {
+  transform: scale(1.05); /* 1.05배로 살짝 확대 */
+}
+
+
+
+
+
+/* 텍스트 */
+.hero-text{
+  position:absolute;
+  bottom:8%;
+  left:8%;
+}
+
+
+/* 1. @font-face로 폰트 정의 */
+@font-face {
+    font-family: 'RoxboroughCFbold';
+    src: url('../font/roxboroughcf-medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* 2. 적용 */
+.hero-text1{
+    position:absolute;
+    top: 35%;       /* 화면 위에서 25% 위치 */
+    left: 13%;
+    font-family: 'RoxboroughCFbold', sans-serif;
+    letter-spacing: 1.2px;
+    font-size:35px;
+    color: #e9dfce
+  }
+
+.hero-text2{
+    position:absolute;
+     top:52%;     
+    left: 13%;
+    font-family: 'RoxboroughCFbold', sans-serif;
+    font-size: 80px;
+    line-height: 1.1;
+}
+
+
+fieldset {
+    border: none; 
+    padding: 0;
+    margin: 0;
+    color: #e9dfce;
+}
+
+.hero-copy1{}
+
+.hero-copy{
+  font-size:0.9rem;
+  letter-spacing:0.25em;
+  color:rgba(46,33,27,0.75);
+}
+
+/* ===============================
+   HERO IMAGE & TEXT MEDIA QUERIES
+================================ */
+
+/* 태블릿 768px 이하 */
+@media screen and (max-width: 768px) {
+  .hero-image {
+    height: 80vh;           /* 높이 조정 */
+    background-size: cover; /* 이미지 비율 유지 */
+  }
+
+  .hero-text {
+    bottom: 6%;
+    left: 6%;
+  }
+
+  .hero-text1 {
+    font-size: 28px;
+    top: 30%;
+    left: 8%;
+  }
+
+  .hero-text2 {
+    font-size: 60px;
+    top: 45%;
+    left: 8%;
+    line-height: 1.1;
+  }
+
+  .hero-copy {
+    font-size: 0.85rem;
+  }
+}
+
+/* 모바일 480px 이하 */
+@media screen and (max-width: 480px) {
+  .hero-image {
+    height: 70vh;           
+    background-size: cover;
+    background-position: right top; /* 이미지 오른쪽 중심 */
+    margin-top: 80px;
+    
+  }
+
+  /* 텍스트 전체 오른쪽 정렬 + 여백 확보 */
+  .hero-text {
+    bottom: 5%;
+    right: 12%;      /* 오른쪽 여백 확보 */
+    left: auto;       
+    text-align: right; 
+  }
+
+  .hero-text1 {
+    font-size: 24px;
+    top: 38%;
+    right: 12%;      /* 오른쪽 여백 확보 */
+    left: auto;
+    text-align: right;
+  }
+
+  .hero-text2 {
+    font-size: 45px;
+    top: 50%;
+    right: 12%;      /* 오른쪽 여백 확보 */
+    left: auto;
+    line-height: 1.1;
+    text-align: right;
+  }
+
+  .hero-copy {
+    font-size: 0.75rem;
+    text-align: right;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   HEADER BASE
+================================ */
+.main-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(246,243,238,0);
+  backdrop-filter: blur(0);
+  transition: background 0.6s ease, backdrop-filter 0.6s ease;
+}
+
+.main-header:hover{
+  background: rgba(246,243,238,0.9);
+  backdrop-filter: blur(6px);
+}
+
+.header-inner{
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo{
+  font-family: 'Cormorant', serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.35em;
+  color: var(--deep);
+  position: relative;
+  left: -250px; /* 기본 PC 위치 */
+}
+
+.logo img{
+  height: 65px;
+  width: auto;
+  display: block;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.logo.hide-logo img{
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.logo img:hover{
+  opacity: 0.65;
+}
+
+/* 메뉴 스타일 */
+
+/* .menu {background: rgba(246, 243, 238, 0.3); /* 반투명 */
+
+
+.menu a {
+  margin-left: 48px;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--latte);
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+   text-decoration: none !important; /* 기본 underline 제거 */
+  
+  
+}
+
+
+
+.menu a::after{
+  content:"";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: var(--latte);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.menu a:hover::after{
+  opacity: 1;
+}
+
+
+
+
+
+
+
+/* ===============================
+   TABLET: 768px 이하
+================================ */
+@media screen and (max-width: 768px) {
+  .header-inner{
+    padding: 18px 5%;
+  }
+
+  .logo{
+    font-size: 1rem;
+    left: -150px; /* 로고 위치 조정 */
+  }
+
+  .logo img{
+    height: 55px;
+  }
+
+  .menu a{
+    margin-left: 30px;
+    font-size: 0.65rem;
+  }
+}
+
+/* ===============================
+   MOBILE: 480px 이하 – 가로 메뉴
+================================ */
+@media screen and (max-width: 480px) {
+  .header-inner{
+    flex-direction: row;           /* 가로 정렬 */
+    justify-content: space-between; /* 좌우 여백 확보 */
+    align-items: center;
+    padding: 10px 4%;
+  }
+
+  .logo{
+    font-size: 0.95rem;
+    left: 0;
+    margin: 0;
+  }
+
+  .logo img{
+    height: 50px;
+  }
+
+  /* 메뉴 – 가로, 반투명 패널 */
+  .menu{
+    display: flex;
+    flex-direction: row;           /* 가로 배치 */
+    gap: 8px;                      /* 메뉴 간 간격 */
+    background: rgba(246, 243, 238, 0.3); /* 반투명 */
+    backdrop-filter: blur(3px);
+    border-radius: 6px;
+    padding: 4px 8px;
+  }
+
+  .menu a{
+      margin: 4px 8px;       /* 위아래 간격 줄임 */
+    font-size: 0.65rem;  /* 글자 크기 약간 축소 */
+    letter-spacing: 0.15em; /* 자간 줄임 */
+    color: #5C4638;
+    text-align: center;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    
+  }
+
+  .menu a:hover{
+    background: rgba(92, 70, 56, 0.85);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(53, 33, 2, 0.15);
+    padding: 6px 12px;
+  }
+
+  .menu a::after{
+    display: none; /* 모바일에서는 언더라인 제거 */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.hero-video {
+  position:relative;
+  width:100%;           /* 양쪽 여백 확보, 원하는 비율로 조절 가능 */
+  max-width:1600px;    /* 최대 크기 제한 */
+  height:100vh;         /* 높이 조절 */
+  margin:0 auto;       /* 가운데 정렬 */
+  overflow:hidden;
+  /* border-radius:100px; */
+}
+.hero-video video {
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:100%;
+  height:100%;
+  object-fit:cover;       /* 화면 가득 채우기 */
+  transform:translate(-50%, -50%);  /* 중앙 정렬 */
+  z-index:-1;             /* 다른 콘텐츠 위에 겹치지 않게 */
+}
+
+.hero-video .overlay {
+  position:absolute;
+  inset:0;
+  background:rgba(246,243,238,0.2); /* 라떼 아이보리 무드 오버레이 */
+  z-index:1;
+}
+
+
+/* =========================
+   HERO VIDEO MOBILE (480px 이하)
+   ========================= */
+@media (max-width: 480px) {
+
+  .hero-video {
+    width: 100%;           /* 화면 폭에 맞춤 */
+    max-width: 100%;       /* 최대 폭 제한 제거 */
+    height: 60vh;          /* 모바일에서 높이 줄임 */
+    margin: 0 auto;
+
+    overflow: hidden;
+    border-radius: 0;      /* 모바일에서는 둥근 모서리 제거 */
+    
+  }
+
+  .hero-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .hero-video .overlay {
+    background: rgba(246, 243, 238, 0.25); /* 오버레이 약간 더 어둡게 */
+    z-index: 1;
+  }
+
+  /* HERO TEXT 중앙 정렬 */
+    .hero-video .hero-text {
+    position: absolute;
+    top: 90%;                 /* 중앙 -> 하단으로 이동 */
+    left: 50%;
+    transform: translateX(-50%);  /* X축만 중앙 */
+    width: 90%;
+    text-align: center;
+    
+    
+  }
+
+  .hero-video .hero-copy {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #5a4b3d;
+    letter-spacing: 1px;
+    transform: translateX(-20%);  /* X축만 중앙 */
+  }
+
+  /* LOOKBOOK 버튼 조정 */
+  .lookbook-container {
+    margin-top: 15px;
+    padding: 0 5%;
+    position: relative;
+    margin-top: -15px;
+  }
+
+  .lookbook {
+    width: 90%;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .lookbook p {
+    margin: 0;
+  }
+
+  .lookbook .arrow {
+    margin-left: 4px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   SLIDER BASE
+================================ */
+
+/* 슬라이더 컨테이너 */
+.slider-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 슬라이더 래퍼 */
+.slider-wrapper {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* ===============================
+   SLIDE LAYOUT
+================================ */
+
+.mid-section {
+  display: flex;
+  flex: 0 0 100%;
+  height: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 3%;
+}
+
+/* 이미지 / 텍스트 50:50 */
+.mid-image,
+.mid-text {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* ===============================
+   IMAGE (NO EFFECT)
+================================ */
+
+.mid-image,
+.mid-image img {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.mid-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===============================
+   TEXT LAYOUT
+================================ */
+
+.mid-text {
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+}
+
+/* ===============================
+   TEXT ANIMATION (MOVE ONLY)
+================================ */
+
+.mid-text h2,
+.mid-text p,
+.mid-text li,
+.mid-text .bu {
+  opacity: 1;
+  filter: none;
+  transform: translateY(18px);
+  transition: transform 1.2s cubic-bezier(0.22,1,0.36,1);
+}
+
+.reveal.show .mid-text h2,
+.reveal.show .mid-text p,
+.reveal.show .mid-text li,
+.reveal.show .mid-text .bu {
+  transform: translateY(0);
+}
+
+.reveal.show .mid-text h2 { transition-delay: 0.1s; }
+.reveal.show .mid-text p  { transition-delay: 0.25s; }
+.reveal.show .mid-text li:nth-child(1) { transition-delay: 0.4s; }
+.reveal.show .mid-text li:nth-child(2) { transition-delay: 0.5s; }
+.reveal.show .mid-text li:nth-child(3) { transition-delay: 0.6s; }
+.reveal.show .mid-text li:nth-child(4) { transition-delay: 0.7s; }
+.reveal.show .mid-text li:nth-child(5) { transition-delay: 0.8s; }
+.reveal.show .mid-text .bu { transition-delay: 0.95s; }
+
+/* ===============================
+   TEXT STYLE
+================================ */
+
+.mid-text h2 {
+  font-size: 2.4em;
+  margin-bottom: 3.5%;
+  color: #8B6F5A;
+  line-height: 1.2;
+}
+
+.mid-text p {
+  font-size: 1.1em;
+  margin-bottom: 3.5%;
+  color: #8B6F5A;
+  line-height: 1.5;
+}
+
+.mid-text ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  line-height: 1.7;
+  color: #8B6F5A;
+}
+
+.mid-text .bu button {
+  padding: 12px 30px;
+  border: 1px solid #8B6F5A;
+  background: transparent;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #5a4b3d;
+  transition: all 0.3s ease;
+}
+
+.mid-text .bu button:hover {
+  background-color: #5a4b3d;
+  color: #fff;
+}
+
+/* ===============================
+   DOT NAVIGATION
+================================ */
+
+.dots {
+  position: absolute;
+  bottom: 30px;
+  right: 100px;
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #dfd0ba;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #886853;
+}
+
+/* ===============================
+   TABLET: 768px 이하
+================================ */
+
+@media screen and (max-width: 768px) {
+  .mid-section {
+    flex-direction: column;
+    padding: 20px;
+    height: auto;
+  }
+
+  .mid-image,
+  .mid-text {
+    width: 100%;
+    height: auto;
+  }
+
+  .mid-text {
+    margin-top: 20px;
+    padding: 15px;
+  }
+
+  .mid-text h2 {
+    font-size: 1.8em;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .mid-text p {
+    font-size: 1em;
+    text-align: center;
+  }
+
+  .mid-text ul {
+    font-size: 0.95em;
+    padding-left: 15px;
+  }
+
+  .mid-text .bu button {
+    font-size: 0.95em;
+    padding: 10px 25px;
+    width: auto;
+  }
+
+  .dots {
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    gap: 6px;
+  }
+}
+
+
+
+@media screen and (max-width: 480px) {
+  .mid-section {
+    flex-direction: column;
+    padding: 15px 8%;
+    height: auto;
+  }
+
+  .mid-image {
+    width: 100%; /* 이미지 잘리지 않게 100% */
+    height: auto;
+   
+  }
+
+   .mid-section .mid-image img {
+    width: 100%;           /* 가로 꽉 채움 */
+    height: auto;          /* 세로 비율 유지 */
+    object-fit: contain;   /* 이미지 전체 보이게 */
+    object-position: left center; /* 왼쪽 정렬 */
+  }
+
+  .mid-image,
+  .mid-text {
+    width: 100%; /* 이미지 잘리지 않게 100% */
+    height: auto;
+
+  }
+
+  .mid-text {
+    margin-top: -30px;
+    padding: 10px;
+  }
+
+  /* h2 폭 제한 및 줄바꿈 */
+  .mid-text h2 {
+    font-size: 1.6em;
+    line-height: 1.3;
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto 12px auto;
+    word-break: break-word;
+  }
+
+  .mid-text p {
+    font-size: 0.95em;
+    line-height: 1.6;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  .mid-text ul {
+    font-size: 0.85em;
+    padding-left: 15px;
+    line-height: 1.5;
+  }
+
+  /* 버튼 스타일 및 margin-bottom으로 dots와 간격 확보 */
+  .mid-text .bu button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    width: 100%;
+    margin-bottom: 10px; /* 버튼과 dots 간격 */
+  }
+
+  /* dots 중앙 배치 */
+  .dots {
+    bottom: 0; /* 화면 안쪽으로 안전하게 */
+    right: 50%;
+    transform: translateX(50%);
+    gap: 6px;
+  }
+
+  /* 모바일 전용 줄바꿈 */
+  .mobile-br {
+    display: block;
+  }
+}
+
+/* PC/태블릿에서는 줄바꿈 없음 */
+@media screen and (min-width: 481px) {
+  .mobile-br {
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+.lookbook-container {
+  display: flex;
+  justify-content: center; /* 가로 중앙 */
+  align-items: center;     /* 세로 중앙 */
+  height: 150px;           /* 섹션 높이 */
+}
+
+.lookbook {
+  display: inline-flex;    
+  justify-content: center;
+  align-items: center;
+  padding: 8px 20px;       
+  border: 1px solid #c79c7a;  
+  background-color: transparent;
+  text-align: center;
+  border-radius: 100PX;
+}
+
+.lookbook p {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #835e48;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+
+.lookbook .arrow {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+
+
+.lookbook:hover .arrow {
+  transform: translateX(6px); /* 화살표 오른쪽으로 이동 */
+  color: #644c36;                /* 화살표 색상 변경 */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   PHILOSOPHY SECTION
+   ========================= */
+
+/* 기본 스타일 (PC 기준) */
+.philosophy {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.philosophy p {
+  margin-bottom: 36px;
+  font-size: 1.05rem;      /* 약 16.8px */
+  line-height: 1.6;
+  word-break: keep-all;
+  white-space: normal;
+}
+
+/* 모바일 전용 줄바꿈 */
+.mobile-br {
+  display: none;
+}
+/* floating word */
+.word {
+  position: absolute;
+  font-family: 'Cormorant', serif;
+  font-size: 7rem;
+  color: rgba(139, 111, 90, 0.12);
+  top: 40%;
+  right: 5%;
+  pointer-events: none;
+}
+
+
+
+/* =========================
+   반응형: 태블릿
+   ========================= */
+@media (max-width: 1024px) {
+  .philosophy {
+    max-width: 480px;
+  }
+
+  .philosophy p {
+    font-size: 0.95rem;     /* 약 15.2px */
+    margin-bottom: 28px;
+  }
+
+  .word {
+    font-size: 5rem;
+    top: 35%;
+    right: 3%;
+  }
+}
+
+/* =========================
+   반응형: 모바일
+   ========================= */
+@media (max-width: 768px) {
+  .philosophy {
+    max-width: 90%;
+    padding: 0 15px;
+  }
+
+  .philosophy p {
+    font-size: 0.85rem;     /* 약 13.6px */
+    margin-bottom: 24px;
+    line-height: 1.55;
+    word-break: break-word;
+  }
+
+  .word {
+    font-size: 3.5rem;
+    top: 30%;
+    right: 2%;
+  }
+
+}
+
+/* =========================
+   반응형: 초소형 모바일 (480px 이하)
+   ========================= */
+@media (max-width: 480px) {
+.mobile-br {
+    display: block; /* 줄바꿈 적용 */
+  }
+
+  /* 텍스트 크기, 줄 간격 조정 */
+  .philosophy-text p {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+  .word {
+    font-size: 2.5rem;
+    top: 25%;
+    right: 1%;
+  }
+}
+
+
+
+
+
+.philosophy-section {
+  position: relative;
+  padding: 100px 10%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.philosophy-text {
+  z-index: 2;
+  max-width: 600px;
+  font-size: 1.2em;
+  line-height: 1.8;
+  color: #8B6F5A;
+
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.philosophy-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 한글 ‘멜린’ */
+.philosophy-text h1.kor {
+  font-size: 60px;
+  font-family: 'Cormorant Garamond', serif; /* 고급 세리프 */
+  font-weight: 700;
+  color: #8B6F5A;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+
+/* 영문 MELLIN 배경 */
+.philosophy-word {
+  position: absolute;
+  font-size: 20vw; /* 크게 배경처럼 */
+  font-weight: 900;
+  color: rgba(140, 111, 85, 0.08);
+  top: 20%;
+  right: 7%;
+  pointer-events: none;
+  z-index: 1;
+  letter-spacing: 2px;
+}
+
+
+
+
+
+
+
+
+.scroll-buttons {
+  position: fixed;
+  right: 30px;
+  bottom: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 999;
+}
+
+.scroll-buttons button {
+  width: 30px;
+  height: 30px;
+ 
+  border: 1px solid rgba(140,111,85,0.5);
+  background: rgba(255,255,255,0.1);
+  color: #8B6F5A;
+  font-size: 1.2em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+   
+}
+
+.scroll-buttons button:hover {
+  background: rgba(140,111,85,0.1);
+  color: #8B6F5A;
+  transform: scale(1.1);
+}
+/* ===============================
+   SCROLL BUTTONS: MOBILE 480px 이하
+================================ */
+@media screen and (max-width: 480px) {
+  .scroll-buttons {
+    right: 10px;        /* 오른쪽 여백 줄임 */
+    bottom: 40%;         /* 화면 중앙보다는 위쪽으로 살짝 이동 */
+    gap: 15px;           /* 버튼 간격 줄임 */
+  }
+
+  .scroll-buttons button {
+    width: 25px;         /* 버튼 크기 축소 */
+    height: 25px;
+    font-size: 1em;      /* 화살표 글자 크기 축소 */
+  }
+}
+
+
+
+
+
+
+
+/* =========================
+   MANIFESTO
+   ========================= */
+
+/* 기본 스타일 */
+.manifesto {
+  font-family: 'Cormorant', serif;
+  font-size: 2.4rem;
+  line-height: 1.5;
+  max-width: 720px;
+}
+
+.manifesto-section {
+  display: flex;
+  width: 100%;
+  padding: 10px 10%;
+  background-color: #f5f2ef;
+  gap: 200px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+}
+
+.manifesto-left {
+  width: 50%;
+  color: #5a4b3d;
+}
+
+.manifesto-left h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.manifesto-left hr {
+  border: 0;
+  border-top: 1px solid #d2c7ba;
+  margin: 20px 0;
+}
+
+.manifesto-item {
+  margin-bottom: 30px;
+}
+
+.manifesto-item h4 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.manifesto-item p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.manifesto-right {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.manifesto-right img {
+  width: 80%;
+  max-width: 650px;
+  border-radius: 100px;
+  margin-bottom: 30px;
+  object-fit: cover;       
+  object-position: center; 
+  display: block;
+}
+
+.manifesto-right button,
+.bu button {
+  padding: 12px 30px;
+  border: 1px solid #5a4b3d;
+  background: transparent;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #5a4b3d;
+  transition: all 0.3s ease;
+}
+
+.bu button {
+  margin-top: 20px;
+  margin-left: -30px;
+}
+
+.manifesto-right button:hover,
+.bu button:hover {
+  background-color: #5a4b3d;
+  color: #fff;
+}
+
+/* =========================
+   반응형: 태블릿 (1024px 이하)
+   ========================= */
+
+   @media (max-width: 1024px) {
+  .manifesto-section {
+    flex-direction: column;
+    gap: 60px;
+    padding: 10px 8%;
+  }
+
+  .manifesto-left,
+  .manifesto-right {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .manifesto-left h2 {
+    font-size: 36px;
+  }
+
+  .manifesto-item h4 {
+    font-size: 18px;
+  }
+
+  .manifesto-item p {
+    font-size: 15px;
+  }
+
+  .manifesto-right img {
+    width: 90%;
+    max-width: 500px;
+  }
+
+  .bu button {
+    margin-left: 0;
+  }
+}
+
+/* =========================
+   반응형: 모바일 (480px 이하)
+   ========================= */
+@media (max-width: 480px) {
+  .manifesto-section {
+    flex-direction: column;
+    gap: 20px;           /* 모바일에서 라인 간격 약간 조정 */
+    padding: 10px 8%;    /* 좌우 여백 */
+    box-sizing: border-box;
+    position: relative;
+    top: 0;              /* top 제거 */
+    margin-bottom: 0;    /* margin-bottom 제거 */
+  }
+
+  /* manifesto 내부 텍스트 줄 간격 줄이기 */
+  .manifesto-text .line {
+    margin-bottom: 8px;  /* 기본보다 조금 좁게 */
+  }
+
+  /* slider-container 바로 붙이기 */
+  .slider-container {
+    margin-top: 0;       /* slider 상단 여백 제거 */
+  }
+  .manifesto-left,
+  .manifesto-right {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .manifesto {
+    font-size: 1.8rem;
+    line-height: 1.6;
+  }
+
+  .manifesto-left h2 {
+    font-size: 28px;
+  }
+
+  .manifesto-item h4 {
+    font-size: 16px;
+    margin-left: 0;   /* 좌측 여백 제거 */
+  }
+
+  .manifesto-item p {
+    font-size: 14px;
+    line-height: 1.65;
+    width: 100%;      /* 부모 영역 전체 사용 */
+    margin: 4px 0 0 0; /* 위쪽만 약간 간격, 좌우 여백 제거 */
+    word-break: break-word;
+    text-align: left; /* 좌측 정렬 */
+  }
+
+  .manifesto-right img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 50px;
+    margin-top:20px ;
+  }
+
+  .manifesto-right button,
+  .bu button {
+    width: 100%;
+    padding: 10px 20px;
+    margin-left: 0;
+    font-size: 14px;
+  }
+
+  /* 모바일 전용 줄바꿈 */
+  .mobile-br {
+    display: block;
+    content: "";
+    height: 0;
+  }
+}
+
+
+
+
+
+
+
+
+.bu_1 button{  padding: 12px 20px;
+  border: 1px solid #8B6F5A;
+  background: transparent;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #5a4b3d;
+  transition: all 0.3s ease;
+margin-top:10px; 
+}
+
+  
+
+  .bu_1 button:hover {
+  background-color: #5a4b3d;
+  color: #fff;
+}
+
+
+
+/* 기본 스타일 */
+a[href*="intro.html"] {
+  text-transform: uppercase;
+}
+
+a[href*="intro.html"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(53, 33, 2, 0.199);
+  background: #5C4638; /* 부드러운 호버 브라운 */
+}
+
+/* ===============================
+   MOBILE: 480px 이하
+================================ */
+@media screen and (max-width: 480px) {
+  a[href*="intro.html"] {
+    font-size: 0.75rem !important;   /* 글자 크기 축소 */
+    padding: 6px 10px !important;      /* 모바일 여백 조정 */
+    margin-top: 50px;
+    
+  }
+
+  a[href*="intro.html"]:hover {
+    transform: translateY(-1px); /* 살짝만 이동 */
+    box-shadow: 0 4px 8px rgba(53, 33, 2, 0.15); /* 그림자 작게 */
+    background: #5C4638;
+  }
+}
+
+
+
+
+/* 기존 hide-logo 없으면 추가 */
+.hide-logo {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+
+
+
+.rotating-text-wrapper {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: rotate 20s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+
+
+
+
+/* PHILOSOPHY 섹션 기본 */
+.philosophy-section {
+  position: relative;
+  padding: 100px 10%;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.philosophy-text {
+  z-index: 2;
+  max-width: 600px;
+  font-size: 1.2em;
+  line-height: 1.8;
+  color: #8B6F5A;
+
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.philosophy-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 한글 ‘멜린’ */
+.philosophy-text h1.kor {
+  font-size: 60px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  color: #8B6F5A;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+
+/* =========================
+   PHILOSOPHY 회전 원형 텍스트
+   ========================= */
+.rotating-text-wrapper {
+  position: absolute;
+  top: 35%;          /* PHILOSOPHY 섹션에 맞게 위치 조정 */
+  left: 18%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  width: 200px;      /* PC 기준 크기 */
+  height: 200px;
+  pointer-events: none;
+  
+  opacity: 0;        /* 스크롤 시 나타나도록 */
+  transition: opacity 1s ease;
+  
+  animation: rotate 20s linear infinite;
+}
+
+.rotating-text-wrapper.visible {
+  opacity: 1;
+}
+
+.rotating-text-wrapper text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  fill: rgba(115, 90, 65, 0.5); /* 브라운 무드 */
+  letter-spacing: 1;
+}
+
+/* 회전 애니메이션 */
+@keyframes rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* =========================
+   모바일 대응 (480px 이하)
+   ========================= */
+@media (max-width: 480px) {
+  .rotating-text-wrapper {
+    width: 200px;
+    height: 200px;
+    top: 30%;          
+  left: 43%;
+  }
+
+  .rotating-text-wrapper text {
+    font-size: 12px;
+    letter-spacing: 0.5;
+  }
+
+  .mobile-br {
+    display: block;  /* 모바일에서 줄바꿈 발생 */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+</head>
+
+<body>
+
+
+
+<!-- HERO -->
+
+
+
+
+
+
+
+
+
+<a id="replayIntro" href="intro.html?replay=true" style="
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    padding: 7px 15px;
+    background: #5e4738;
+    color: #F5EFE6;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
+">
+    INTRO 
+</a>
+
+
+
+
+
+
+
+
+<header class="main-header">
+  <div class="header-inner">
+    <a href="./index.html" class="logo">
+    <img src="img/LOGO2.svg" alt="MELLIN">
+  </a>
+
+<nav class="menu">
+  <a href="#" data-eng="ABOUT" data-kor="소개">ABOUT</a>
+  <a href="#" data-eng="COLLECTION" data-kor="컬렉션">COLLECTION</a>
+  <a href="#" data-eng="PHILOSOPHY" data-kor="철학">PHILOSOPHY</a>
+  <a href="#" data-eng="CONTACT" data-kor="문의">CONTACT</a>
+</nav>
+
+
+  </div>
+</header>
+
+
+
+
+
+
+
+
+<section class="hero-image">
+ <div class="hero-text1">
+    <p class="hero-copy1"  data-aos="fade-up" data-aos-delay="500">MELLIN MOOD</p>
+  </div>
+   <div class="hero-text2" data-aos="fade-right" data-aos-delay="1000">
+    <p class="hero-copy"><Fieldset>Form begins <br>before<br>
+      definition
+    </Fieldset></p>
+  </div>
+
+
+<!--   <div class="hero-text">
+    <p class="hero-copy">Form begins before definition.</p>
+  </div> -->
+</section>
+
+
+
+
+<!-- PHILOSOPHY -->
+<section class="philosophy-section">
+  <div class="philosophy-text">
+    <h1 class="kor">‘멜린’</h1>
+    <p>감각에서 시작하는 멜린.</p>
+    <p>
+      옷은 몸을 입히는 것이 아니라 <br class="mobile-br">존재를 드러냅니다.
+    </p>
+    <p>
+      선과 선 사이, 의미가 스며드는 <br class="mobile-br">순간을 소중히 합니다.
+    </p>
+  </div>
+
+  <!-- 원형 회전 텍스트 -->
+  <div class="rotating-text-wrapper" data-aos="fade-down" data-aos-delay="500" >
+    <svg width="200" height="200" viewBox="0 0 300 300">
+      <defs>
+        <path id="circlePath" d="
+          M 150,150
+          m -110,0
+          a 110,110 0 1,1 220,0
+          a 110,110 0 1,1 -220,0
+        "/>
+      </defs>
+
+     <text font-family="Cormorant Garamond, serif" font-size="13" fill="rgba(115,90,65,0.5)" letter-spacing="1">
+  <textPath href="#circlePath" startOffset="50%" text-anchor="middle">
+    MELLIN ATELIER • CREATIVE VISION • LUXURY MINIMAL • NEWYORK MOOD • MELLIN CREATIVE •
+  </textPath>
+</text>
+    </svg>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section class="hero-video">
+  <video src="video/MELLIN.mp4" autoplay muted loop playsinline></video>
+  <div class="overlay"></div>
+
+  <div class="hero-text">
+    <p class="hero-copy">Crafting Luxury, Defining Style</p>
+  </div>
+  
+</section>
+
+
+<div class="lookbook-container">
+  <div class="lookbook" data-aos="fade-up">
+    <p>LOOKBOOK <span class="arrow">▶</span></p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- COLLECTION -->
+<section>
+  <div class="collection">
+    <div class="block block-1" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200">
+      <span>FORM I</span>
+    </div>
+    <div class="block block-2" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="400">
+      <span>FORM II</span>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<!-- MANIFESTO -->
+<section class="manifesto-section">
+  <div class="manifesto-left">
+    <h2 data-aos="fade-down" data-aos-duration="1500" data-aos-delay="200">MANIFESTO</h2>
+    <hr>
+    <div class="manifesto-item" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="400">
+      <h4>VISION</h4>
+      <p>
+  멜린은 디자인과 삶의 경계를 허물고, 진정한 <br class="mobile-br">아름다움을 추구합니다.
+</p>
+
+    </div>
+    <div class="manifesto-item" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="600">
+      <h4>MISSION</h4>
+      <p>제품과 경험을 통해 일상 속에 영감을 불어넣습니다.</p>
+    </div>
+    <div class="manifesto-item" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="800">
+      <h4>VALUES</h4>
+      <p>혁신, 품질, 지속가능성을 최우선으로 합니다.</p>
+    </div>
+    <hr>
+    <div class="bu_1"><p><button>VIEW MORE</button></p></div>
+
+  </div>
+    <div class="manifesto-right" data-aos="fade-left" data-aos-duration="1500" data-aos-delay="200">
+    <div class="image-wrapper">
+      <img src="img/11.png" alt="Manifesto Image">
+      <div class="watercolor-overlay"></div>
+    </div>
+    
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<div class="slider-container">
+  <div class="slider-wrapper">
+
+    <section class="mid-section reveal active">
+      <div class="mid-image">
+        <img src="img/26.png" alt="Model 1">
+      </div>
+      <div class="mid-text">
+        <h2>CONTEMPORARY DRESSING</h2>
+        <p>모던한 무드의 드레스와 스커트, 자연스러운 라인과 <span class="mobile-br"></span>절제된 디테일을 강조</p>
+        <ul>
+          <li>Fluid Silhouettes</li>
+          <li>Architectural Shapes</li>
+          <li>Neutral Color Palette</li>
+          <li>Timeless Eveningwear</li>
+          <li>Subtle Details</li>
+        </ul>
+        <div class="bu"><button>VIEW MORE</button></div>
+      </div>
+    </section>
+
+    <section class="mid-section reveal">
+      <div class="mid-image">
+        <img src="img/23.png" alt="Model 2">
+      </div>
+      <div class="mid-text">
+        <h2>ELEGANT MODERN WOMENWEAR</h2>
+        <p>뉴트럴 컬러 팔레트를 중심으로 한 세련된 실루엣과 <span class="mobile-br"></span>미니멀한 디자인</p>
+        <ul>
+          <li>Everyday Tailoring</li>
+          <li>Soft Draping</li>
+          <li>Minimalist Outerwear</li>
+          <li>Premium Knitwear</li>
+          <li>Modern Layering</li>
+        </ul>
+        <div class="bu"><button>VIEW MORE</button></div>
+      </div>
+    </section>
+
+    <section class="mid-section reveal">
+      <div class="mid-image">
+        <img src="img/24.png" alt="Model 3">
+      </div>
+      <div class="mid-text">
+        <h2>REFINED DETAILS</h2>
+        <p>섬세한 디테일과 고급 소재, 절제된 장식으로 <span class="mobile-br"></span>완성한 럭셔리 여성복</p>
+        <ul>
+          <li>Fine Stitching & Seams</li>
+          <li>Premium Fabrics</li>
+          <li>Minimal Hardware Accents</li>
+          <li>Elegant Buttons & Closures</li>
+          <li>Subtle Texture Play</li>
+        </ul>
+        <div class="bu"><button>VIEW MORE</button></div>
+      </div>
+    </section>
+
+    <section class="mid-section reveal">
+      <div class="mid-image">
+        <img src="img/25.png" alt="Model 4">
+      </div>
+      <div class="mid-text">
+        <h2>MODERN ESSENTIALS</h2>
+        <p>모던하고 실용적인 디자인 요소로 일상과 특별한 순간<span class="mobile-br"></span> 모두를 위한 필수 아이템 제안</p>
+        <ul>
+          <li>Timeless Coats & Jackets</li>
+          <li>Neutral Knit & Layering</li>
+          <li>Sleek Trousers & Skirts</li>
+          <li>Versatile Dresses</li>
+          <li>Everyday Sophisticated Pieces</li>
+        </ul>
+        <div class="bu"><button>VIEW MORE</button></div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <img src="img/LOGO1.svg" alt="MELLIN Logo" class="footer-logo">
+    <p>© MELLIN 2025</p>
+  </div>
+
+  <div class="footer-right">
+    
+    <p>contact@mellin.com</p>
+    <p>서울 동대문구 전농동 620-47 청량리역 <br>롯데캐슬 SKY-L65</p>
+    <p>Tel: 02-900-1234</p>
+    <p>All Rights Reserved</p>
+  </div>
+</footer>
+
+
+
+
+
+
+<!-- 스크롤 버튼 -->
+<div class="scroll-buttons">
+  <button class="scroll-up" onclick="scrollToTop()">▲</button>
+  <button class="scroll-down" onclick="scrollToBottom()">▼</button>
+</div>
+
+
+
+
+
+
+
+<script>
+const lines = document.querySelectorAll('.manifesto-text .line');
+
+function revealManifesto() {
+  const windowHeight = window.innerHeight;
+  lines.forEach((line, index) => {
+    const top = line.getBoundingClientRect().top;
+    if(top < windowHeight * 0.8) {
+      // 애니메이션 딜레이 적용
+      setTimeout(() => {
+        line.style.opacity = 1;
+        line.style.transform = 'translateY(0)';
+      }, index * 200); // 각 줄 0.2초 간격
+    }
+  });
+}
+
+window.addEventListener('scroll', revealManifesto);
+window.addEventListener('load', revealManifesto);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+const logo = document.querySelector('.logo');
+const replayBtn = document.querySelector('#replayIntro');
+
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 50){  // 스크롤 50px 이상이면
+    logo.classList.add('hide-logo');
+    replayBtn.classList.add('hide-logo');
+  } else {                  // 스크롤 상단이면
+    logo.classList.remove('hide-logo');
+    replayBtn.classList.remove('hide-logo');
+  }
+});
+</script>
+
+
+
+<script>
+const slides = document.querySelectorAll('.mid-section');
+const dots = document.querySelectorAll('.dot');
+let currentIndex = 0;
+
+function goToSlide(index) {
+  const wrapper = document.querySelector('.slider-wrapper');
+  wrapper.style.transform = `translateX(-${index * 100}%)`;
+  dots.forEach(dot => dot.classList.remove('active'));
+  dots[index].classList.add('active');
+  currentIndex = index;
+}
+
+// dot 클릭 이벤트
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    goToSlide(i);
+  });
+});
+
+// 자동 슬라이드 (선택 사항)
+setInterval(() => {
+  let nextIndex = (currentIndex + 1) % slides.length;
+  goToSlide(nextIndex);
+}, 5000);
+</script>
+
+
+
+
+
+
+
+<script>
+  // 페이지 로딩 후 .hero-image에 loaded 클래스 추가
+  window.addEventListener('load', () => {
+    document.querySelector('.hero-image').classList.add('loaded');
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+const rotatingText = document.querySelector('.rotating-text-wrapper');
+const philosophyText = document.querySelector('.philosophy-text');
+
+function checkScroll() {
+  const windowHeight = window.innerHeight;
+
+  const sectionTop = philosophyText.getBoundingClientRect().top;
+  if(sectionTop < windowHeight * 0.8) {
+    philosophyText.classList.add('visible');
+    rotatingText.classList.add('visible'); // 원형 텍스트도 함께 등장
+  }
+}
+
+window.addEventListener('scroll', checkScroll);
+window.addEventListener('load', checkScroll);
+
+</script>
+
+
+
+
+
+
+
+<script>
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function scrollToBottom() {
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+}
+</script>
+
+
+
+
+
+
+
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  },
+  {
+    threshold: 0.35
+  }
+);
+
+reveals.forEach(el => observer.observe(el));
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+const footer = document.querySelector('footer');
+
+function revealFooter() {
+  const windowHeight = window.innerHeight;
+  const footerTop = footer.getBoundingClientRect().top;
+
+  if (footerTop < windowHeight) {
+    footer.classList.add('visible');
+  }
+}
+
+window.addEventListener('scroll', revealFooter);
+window.addEventListener('load', revealFooter);
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+const menuLinks = document.querySelectorAll('.menu a');
+
+menuLinks.forEach(link => {
+  // PC/태블릿에서만 hover 시 한국어 표시
+  link.addEventListener('pointerenter', () => {
+    if (window.innerWidth > 480) {
+      link.textContent = link.getAttribute('data-kor');
+    }
+  });
+  link.addEventListener('pointerleave', () => {
+    if (window.innerWidth > 480) {
+      link.textContent = link.getAttribute('data-eng');
+    }
+  });
+
+  // 모바일 터치에서는 글자 변경하지 않음
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<!-- JS: 슬라이드 자동 전환 + AOS refresh -->
+<script>
+AOS.init({
+  duration: 1400,
+  easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+  once: false,
+  offset: 120,
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
