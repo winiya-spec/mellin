@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ovid<!DOCTYPE html>
 <html lang="ko">
 <head>
 
@@ -154,11 +154,6 @@ section{
   .block span {
     font-size: 0.7rem;           /* 캡션 글자 축소 */
     bottom: -20px;               /* 캡션 위치 조정 */
-  }
-
-   /* 모바일에서는 오버레이 제거 */
-  .block::after {
-    display: none;               /* 오버레이 제거 */
   }
 }
 
@@ -593,6 +588,18 @@ footer .footer-right p:hover {
 
 
 
+
+@media screen and (max-width: 1000px) {
+  .logo {
+    left: 0; /* 작은 화면에서 튀어나오지 않도록 */
+  }
+
+   .logo img{
+    height: 55px; /* 화면 크기에 맞게 조정 */
+  }
+}
+
+
 /* ===============================
    TABLET: 1000px 이하
 ================================ */
@@ -791,6 +798,7 @@ footer .footer-right p:hover {
   height: 100vh;
   margin: 0 auto;
   overflow: hidden;
+  margin-top: 5%;
 }
 
 .hero-video video {
@@ -835,6 +843,7 @@ footer .footer-right p:hover {
   .hero-video {
     height: 60vh;            /* 모바일 높이 축소 */
     border-radius: 0;
+    margin-top: 0;
   }
 
   .hero-video video {
@@ -1315,6 +1324,8 @@ footer .footer-right p:hover {
   margin-bottom: 30px;
   line-height: 1.2;
 }
+
+
 /* 배경 영문 MELLIN */
 .philosophy-word {
   position: absolute;
@@ -1322,14 +1333,13 @@ footer .footer-right p:hover {
   font-weight: 900;
   font-family: 'Noto Sans KR', 'Arial', 'Helvetica', sans-serif; /* 고딕체 스타일 */
   color: rgba(140, 111, 85, 0.08);
-  top: 0%;
+  top: 0%; /* PC에서는 0% */
   right: 7%;
   pointer-events: none;
   z-index: 1;
   letter-spacing: 2px;
+   writing-mode: horizontal-tb; /* 가로 텍스트 */
 }
-
-
 
 
 /* =========================
@@ -1350,6 +1360,10 @@ footer .footer-right p:hover {
     top: 35%;
     right: 3%;
   }
+
+
+
+  
 }
 
 /* =========================
@@ -1394,12 +1408,15 @@ footer .footer-right p:hover {
     top: 25%;
     right: 1%;
   }
-/* 배경 영문 MELLIN */
- .philosophy-word {
-    top: 20%; /* 이 부분만 변경 */
-  }
 
+  .philosophy-word {
+    top: 20% !important; /* 모바일에서는 20% */
+    font-size: 20vw; /* 필요하면 폰트 크기도 줄이기 */
+  }
 }
+
+
+
 
 /* =========================
    PHILOSOPHY SECTION 추가 스타일
@@ -1431,6 +1448,9 @@ footer .footer-right p:hover {
   opacity: 1;
   transform: translateY(0);
 }
+
+
+
 
 
 
@@ -1913,6 +1933,16 @@ a[href*="intro.html"]:hover {
     display: block;  /* 모바일 줄바꿈 */
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
