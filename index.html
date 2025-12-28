@@ -1894,13 +1894,12 @@ a[href*="intro.html"]:hover {
 
 
 <section class="hero-video">
-  <video src="video/MELLIN.mp4" autoplay muted loop playsinline></video>
+  <video id="heroVideo" src="video/MELLIN.mp4" autoplay muted loop playsinline></video>
   <div class="overlay"></div>
 
   <div class="hero-text">
     <p class="hero-copy">Crafting Luxury, Defining Style</p>
   </div>
-  
 </section>
 
 
@@ -2328,6 +2327,36 @@ window.addEventListener('load', () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  const video = document.getElementById('heroVideo');
+
+  // 모바일에서 자동 재생 안될 경우 터치 시 재생
+  function playVideoOnTouch() {
+    if (video.paused) {
+      video.play().catch(err => console.log('모바일 자동재생 실패:', err));
+    }
+    document.body.removeEventListener('touchstart', playVideoOnTouch);
+  }
+
+  document.body.addEventListener('touchstart', playVideoOnTouch, { once: true });
+
+  // 로드 시 시도
+  video.play().catch(err => {
+    console.log('자동재생 실패, 터치 필요:', err);
+  });
+</script>
 
 
 
