@@ -9,10 +9,11 @@
 <title>MELLIN</title>
 <script>
   window.addEventListener("load", () => {
-    if (!sessionStorage.getItem("introSeen")) {
-      window.location.replace("intro.html");
-    }
-  });
+  if (!sessionStorage.getItem("introSeen")) {
+    window.location.replace("./intro.html"); // ./를 붙여 상대경로로
+  }
+});
+
   </script>
 
 
